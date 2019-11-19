@@ -1,1 +1,1 @@
-web: puma config/puma.rb
+web: bin/start-nginx puma config/puma.rb
