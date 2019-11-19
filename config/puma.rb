@@ -1,9 +1,15 @@
+require 'fileutils'
+
 workers ENV.fetch('WEB_CONCURRENCY') { 1 }
 threads ENV.fetch('MIN_THREADS') { 1 }.to_i, ENV.fetch('MAX_THREADS') { 1 }.to_i
 if ENV['SOCKET']
   bind "unix://#{ENV['SOCKET']}"
 else
   bind "tcp://#{ENV.fetch('BIND', '0.0.0.0')}:#{ENV.fetch('PORT', 3000)}"
+end
+
+before_fork do
+  FileUtils.touch('/tmp/app-initialized')
 end
 
 on_worker_shutdown do
