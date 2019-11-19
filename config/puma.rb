@@ -7,7 +7,7 @@ else
 end
 
 on_worker_shutdown do
-    puts "[#{$$}] Shutting down"
+  puts "[#{$$}] Shutting down"
 end
 
 app do |env|
